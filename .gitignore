@@ -1,0 +1,41 @@
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+build/
+
+# Web
+web/.last_build_id
+
+# Android
+android/.gradle
+android/local.properties
+android/app/debug
+android/app/profile
+android/app/release
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/app.flx
+ios/Runner.xcworkspace
+
+# macOS
+macos/Pods/
+
+# Windows
+windows/flutter/ephemeral/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Env
+.env
+.env.*
