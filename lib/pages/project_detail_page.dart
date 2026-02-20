@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/widgets/animated_entry.dart';
+import 'package:my_portfolio/widgets/footer.dart';
 import '../models/project_model.dart';
 import '../utils/responsive.dart';
 import '../widgets/navbar.dart';
 import '../widgets/screenshot_gallery.dart';
+import '../widgets/app_page_wrapper.dart';
 
 class ProjectDetailPage extends StatelessWidget {
   const ProjectDetailPage({super.key});
@@ -25,8 +27,8 @@ class ProjectDetailPage extends StatelessWidget {
 
     final isMobile = Responsive.isMobile(context);
 
-    return Scaffold(
-      body: SingleChildScrollView(
+    return AppPageWrapper(
+      child: SingleChildScrollView(
         child: Column(
           children: [
             const Navbar(),
@@ -41,6 +43,8 @@ class ProjectDetailPage extends StatelessWidget {
                   ? _MobileContent(project: project)
                   : _DesktopContent(project: project),
             ),
+            SizedBox(height: 60),
+            Footer(),
           ],
         ),
       ),

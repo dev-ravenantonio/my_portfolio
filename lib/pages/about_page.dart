@@ -4,6 +4,7 @@ import '../widgets/navbar.dart';
 import '../widgets/animated_entry.dart';
 import '../utils/responsive.dart';
 import '../widgets/simple_footer.dart';
+import '../widgets/app_page_wrapper.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -12,8 +13,8 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
 
-    return Scaffold(
-      body: SingleChildScrollView(
+    return AppPageWrapper(
+      child: SingleChildScrollView(
         child: Column(
           children: [
             const Navbar(),
@@ -89,7 +90,7 @@ class AboutPage extends StatelessWidget {
                   /// ===============================
                   AnimatedEntry(
                     offset: const Offset(0, 0.08),
-                    child: Text(
+                    child: const Text(
                       'What I Specialize In',
                       style: TextStyle(
                         fontSize: 26,
@@ -149,7 +150,7 @@ class AboutPage extends StatelessWidget {
                   /// ===============================
                   AnimatedEntry(
                     offset: const Offset(0, 0.08),
-                    child: Text(
+                    child: const Text(
                       'Professional Background',
                       style: TextStyle(
                         fontSize: 26,
@@ -189,7 +190,7 @@ class AboutPage extends StatelessWidget {
                   /// ===============================
                   AnimatedEntry(
                     offset: const Offset(0, 0.08),
-                    child: Text(
+                    child: const Text(
                       'Certifications & Tools',
                       style: TextStyle(
                         fontSize: 26,
@@ -226,6 +227,7 @@ class AboutPage extends StatelessWidget {
                       ],
                     ),
                   ),
+
                   const SizedBox(height: 30),
                   const SimpleFooter(),
                 ],
@@ -245,7 +247,10 @@ class AboutPage extends StatelessWidget {
 class _SectionDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Divider(color: Colors.white.withOpacity(0.08), thickness: 1);
+    return Divider(
+      color: Colors.white.withOpacity(0.08),
+      thickness: 1,
+    );
   }
 }
 
@@ -264,7 +269,8 @@ class _Capability extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+            style:
+                const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 12),
           ...items.map(

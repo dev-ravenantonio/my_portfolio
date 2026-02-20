@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import '../sections/pre_footer_cta.dart';
 import '../sections/selected_projects_section.dart';
 import '../widgets/animated_glow_divider.dart';
-import '../widgets/back_to_top_button.dart';
+import '../widgets/app_page_wrapper.dart';
 import '../widgets/footer.dart';
 import '../widgets/navbar.dart';
 import '../utils/responsive.dart';
 import '../widgets/orbiting_particle.dart';
-import '../widgets/particles_background.dart';
 import '../widgets/primary_home_button.dart';
 import '../widgets/slide_fade_in.dart';
 import '../widgets/tech_stack_section.dart';
@@ -20,39 +19,23 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Background
-          const _AbstractBackground(),
-
-          // Particles
-          const ParticlesBackground(),
-
-          // Content
-          SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: const [
-                Navbar(),
-                _HeroSection(),
-                SizedBox(height: 40),
-                TechStackSection(),
-                SizedBox(height: 60),
-                AnimatedGlowDivider(),
-                SelectedProjectsSection(),
-                PreFooterCTA(),
-                AnimatedGlowDivider(),
-                Footer(),
-              ],
-            ),
-          ),
-          Positioned(
-            right: 24,
-            bottom: 24,
-            child: BackToTopButton(controller: _scrollController),
-          ),
-        ],
+    return AppPageWrapper(
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          children: const [
+            Navbar(),
+            _HeroSection(),
+            SizedBox(height: 40),
+            TechStackSection(),
+            SizedBox(height: 60),
+            AnimatedGlowDivider(),
+            SelectedProjectsSection(),
+            PreFooterCTA(),
+            AnimatedGlowDivider(),
+            Footer(),
+          ],
+        ),
       ),
     );
   }
@@ -372,59 +355,4 @@ class _HeroSection extends StatelessWidget {
   }
 }
 
-/// ===============================
-/// ABSTRACT BACKGROUND
-/// ===============================
-class _AbstractBackground extends StatelessWidget {
-  const _AbstractBackground();
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF020617), Color(0xFF020617), Color(0xFF020617)],
-        ),
-      ),
-      child: Stack(
-        children: [
-          _blurCircle(
-            top: -140,
-            left: -140,
-            size: 320,
-            color: Colors.blueAccent.withOpacity(0.12),
-          ),
-          _blurCircle(
-            bottom: -160,
-            right: -160,
-            size: 360,
-            color: Colors.purpleAccent.withOpacity(0.12),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _blurCircle({
-    double? top,
-    double? bottom,
-    double? left,
-    double? right,
-    required double size,
-    required Color color,
-  }) {
-    return Positioned(
-      top: top,
-      bottom: bottom,
-      left: left,
-      right: right,
-      child: Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(shape: BoxShape.circle, color: color),
-      ),
-    );
-  }
-}

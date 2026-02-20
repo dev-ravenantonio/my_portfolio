@@ -39,3 +39,8 @@ windows/flutter/ephemeral/
 # Env
 .env
 .env.*
+
+# Allow Flutter web build for Netlify
+!build/
+!build/web/
+!build/web/**
