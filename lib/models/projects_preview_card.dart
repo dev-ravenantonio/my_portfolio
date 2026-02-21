@@ -27,7 +27,7 @@ class _ProjectPreviewCardState extends State<ProjectPreviewCard> {
           onTap: () {
             Navigator.pushNamed(
               context,
-              '/project-detail',
+              '/project/${widget.project.slug}',
               arguments: widget.project,
             );
           },

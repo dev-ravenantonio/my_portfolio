@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ScreenshotGallery extends StatelessWidget {
   final List<String> images;
 
-  const ScreenshotGallery({
-    super.key,
-    required this.images,
-  });
+  const ScreenshotGallery({super.key, required this.images});
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +59,8 @@ class _ScreenshotTileState extends State<_ScreenshotTile> {
             child: Stack(
               children: [
                 Positioned.fill(
-                  child: Image.asset(
-                    widget.imagePath,
+                  child: AdaptiveImage(
+                    path: widget.imagePath,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -104,8 +102,8 @@ class _ScreenshotTileState extends State<_ScreenshotTile> {
                 maxScale: 4,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    widget.imagePath,
+                  child: AdaptiveImage(
+                    path: widget.imagePath,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -125,5 +123,21 @@ class _ScreenshotTileState extends State<_ScreenshotTile> {
         );
       },
     );
+  }
+}
+
+class AdaptiveImage extends StatelessWidget {
+  final String path;
+  final BoxFit fit;
+
+  const AdaptiveImage({super.key, required this.path, this.fit = BoxFit.cover});
+
+  @override
+  Widget build(BuildContext context) {
+    if (path.toLowerCase().endsWith('.svg')) {
+      return SvgPicture.asset(path, fit: fit);
+    }
+
+    return Image.asset(path, fit: fit);
   }
 }

@@ -8,12 +8,11 @@ import '../widgets/screenshot_gallery.dart';
 import '../widgets/app_page_wrapper.dart';
 
 class ProjectDetailPage extends StatelessWidget {
-  const ProjectDetailPage({super.key});
+  const ProjectDetailPage({super.key, this.project});
+  final ProjectModel? project;
 
   @override
   Widget build(BuildContext context) {
-    final project = ModalRoute.of(context)?.settings.arguments as ProjectModel?;
-
     if (project == null) {
       return const Scaffold(
         body: Center(
@@ -32,16 +31,16 @@ class ProjectDetailPage extends StatelessWidget {
         child: Column(
           children: [
             const Navbar(),
-            _breadcrumb(context, project),
-            _HeroSection(project: project),
+            _breadcrumb(context, project!),
+            _HeroSection(project: project!),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: isMobile ? 20 : 80,
                 vertical: 60,
               ),
               child: isMobile
-                  ? _MobileContent(project: project)
-                  : _DesktopContent(project: project),
+                  ? _MobileContent(project: project!)
+                  : _DesktopContent(project: project!),
             ),
             SizedBox(height: 60),
             Footer(),
@@ -336,6 +335,8 @@ class _TechDecisions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (project.techDecisions.isEmpty) return const SizedBox.shrink();
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 48),
       child: Column(
@@ -351,24 +352,11 @@ class _TechDecisions extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-
-          _decisionItem(
-            title: 'FlutterFlow',
-            description:
-                'Used for rapid iteration and maintainable cross-platform development '
-                'while keeping full control over logic and architecture.',
-          ),
-          _decisionItem(
-            title: 'Firebase',
-            description:
-                'Chosen for its scalable, serverless backend, real-time data handling, '
-                'and seamless integration with mobile applications.',
-          ),
-          _decisionItem(
-            title: 'Stripe',
-            description:
-                'Integrated for secure, PCI-compliant payment processing with webhook-based '
-                'status handling and production reliability.',
+          ...project.techDecisions.map(
+            (decision) => _decisionItem(
+              title: decision.title,
+              description: decision.description,
+            ),
           ),
         ],
       ),
@@ -575,6 +563,7 @@ Widget _breadcrumb(BuildContext context, ProjectModel project) {
 
 final List<ProjectModel> relatedProjects = [
   ProjectModel(
+    slug: 'nayon-pilipino-mobara',
     title: 'Nayon Pilipino – Mobara',
     subtitle: 'Japan-Based E-Commerce',
     imagePath: 'assets/images/flutterflow/nayonlogo.jpg',
@@ -583,8 +572,29 @@ final List<ProjectModel> relatedProjects = [
     tech: 'FlutterFlow • Firebase • Stripe',
     details: 'E-commerce, payments, and cloud backend.',
     screenshots: [],
+    techDecisions: [
+      TechDecision(
+        title: 'FlutterFlow',
+        description:
+            'Used for rapid iteration and maintainable cross-platform development '
+            'while retaining full control over logic and architecture.',
+      ),
+      TechDecision(
+        title: 'Firebase',
+        description:
+            'Chosen for its scalable, serverless backend, real-time data sync, '
+            'and seamless mobile integration.',
+      ),
+      TechDecision(
+        title: 'Stripe',
+        description:
+            'Implemented for secure, PCI-compliant payment processing with '
+            'webhook-based transaction validation.',
+      ),
+    ],
   ),
   ProjectModel(
+    slug: 'nutrien-servicenow-platform',
     title: 'Nutrien',
     subtitle: 'Enterprise ServiceNow Platform',
     imagePath: 'assets/images/snowlogo.png',
@@ -593,8 +603,29 @@ final List<ProjectModel> relatedProjects = [
     tech: 'ServiceNow • Flow Designer • UI Builder',
     details: 'Automation and workflow optimization.',
     screenshots: [],
+    techDecisions: [
+      TechDecision(
+        title: 'ServiceNow',
+        description:
+            'Selected as the enterprise service management platform to standardize '
+            'employee workflows and internal service delivery.',
+      ),
+      TechDecision(
+        title: 'Flow Designer',
+        description:
+            'Used to automate approvals, service requests, and backend processes '
+            'to reduce manual intervention.',
+      ),
+      TechDecision(
+        title: 'UI Builder',
+        description:
+            'Enabled modern, responsive user interfaces aligned with ServiceNow '
+            'Next Experience standards.',
+      ),
+    ],
   ),
   ProjectModel(
+    slug: 'outsystems-enterprise-apps',
     title: 'The Portal | Checkwriter',
     subtitle: 'Reactive Web Development',
     imagePath: 'assets/images/oslogo.jpg',
@@ -603,6 +634,26 @@ final List<ProjectModel> relatedProjects = [
     tech: 'OutSystems • REST|SOAP - APIs • UI|UX',
     details: 'Web Development',
     screenshots: [],
+    techDecisions: [
+      TechDecision(
+        title: 'OutSystems',
+        description:
+            'Adopted for rapid low-code development while maintaining enterprise-grade '
+            'performance and scalability.',
+      ),
+      TechDecision(
+        title: 'REST & SOAP APIs',
+        description:
+            'Integrated multiple backend systems using secure API patterns to '
+            'support financial transactions and data exchange.',
+      ),
+      TechDecision(
+        title: 'Security Architecture',
+        description:
+            'Implemented role-based access control and validation layers suitable '
+            'for banking and financial environments.',
+      ),
+    ],
   ),
 ];
 
@@ -615,7 +666,7 @@ class _RelatedProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/project-detail', arguments: project);
+        Navigator.pushNamed(context, '/project/${project.slug}');
       },
       child: Container(
         width: 260,
@@ -678,7 +729,7 @@ class _RelatedProjects extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final projects = relatedProjects
-        .where((p) => p.title != current.title)
+        .where((p) => p.slug != current.slug)
         .toList();
 
     if (projects.isEmpty) return const SizedBox.shrink();

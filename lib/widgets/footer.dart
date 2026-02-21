@@ -54,12 +54,6 @@ class Footer extends StatelessWidget {
                 label: 'LinkedIn',
                 url: 'https://linkedin.com/in/raven-antonio/',
               ),
-              SizedBox(width: 18),
-              _SocialIcon(
-                svgPath: 'assets/icons/github.svg',
-                label: 'GitHub',
-                url: 'https://github.com/',
-              ),
             ],
           ),
 

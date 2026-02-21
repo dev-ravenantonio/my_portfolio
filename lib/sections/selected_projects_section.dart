@@ -4,7 +4,8 @@ import '../widgets/project_card.dart';
 import '../utils/responsive.dart';
 
 class SelectedProjectsSection extends StatelessWidget {
-  const SelectedProjectsSection({super.key});
+  const SelectedProjectsSection({super.key, this.project});
+  final ProjectModel? project;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +59,9 @@ class SelectedProjectsSection extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(
                     context,
-                    '/project-detail',
+                    '/project/nayon-pilipino-mobara',
                     arguments: ProjectModel(
+                      slug: 'nayon-pilipino-mobara',
                       title: 'Nayon Pilipino – Mobara',
                       subtitle: 'Japan-Based E-Commerce Application',
                       imagePath: 'assets/images/flutterflow/nayonlogo.jpg',
@@ -76,6 +78,26 @@ class SelectedProjectsSection extends StatelessWidget {
                         'assets/images/flutterflow/Storyboard.png',
                         'assets/images/flutterflow/firebase.png',
                         'assets/images/flutterflow/stripe.png',
+                      ],
+                      techDecisions: [
+                        TechDecision(
+                          title: 'FlutterFlow',
+                          description:
+                              'Used for rapid iteration and maintainable cross-platform development '
+                              'while retaining full control over logic and architecture.',
+                        ),
+                        TechDecision(
+                          title: 'Firebase',
+                          description:
+                              'Chosen for its scalable, serverless backend, real-time data sync, '
+                              'and seamless mobile integration.',
+                        ),
+                        TechDecision(
+                          title: 'Stripe',
+                          description:
+                              'Implemented for secure, PCI-compliant payment processing with '
+                              'webhook-based transaction validation.',
+                        ),
                       ],
                     ),
                   );
@@ -94,8 +116,9 @@ class SelectedProjectsSection extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(
                     context,
-                    '/project-detail',
+                    '/project/nutrien-servicenow-platform',
                     arguments: ProjectModel(
+                      slug: 'nutrien-servicenow-platform',
                       title: 'Nutrien',
                       subtitle: 'Enterprise ServiceNow Platform',
                       imagePath: 'assets/images/snowlogo.png',
@@ -108,6 +131,26 @@ class SelectedProjectsSection extends StatelessWidget {
                         'assets/images/servicenow/snowlogo.png',
                         'assets/images/servicenow/snowlogo.png',
                         'assets/images/servicenow/snowlogo.png',
+                      ],
+                      techDecisions: [
+                        TechDecision(
+                          title: 'ServiceNow',
+                          description:
+                              'Selected as the enterprise service management platform to standardize '
+                              'employee workflows and internal service delivery.',
+                        ),
+                        TechDecision(
+                          title: 'Flow Designer',
+                          description:
+                              'Used to automate approvals, service requests, and backend processes '
+                              'to reduce manual intervention.',
+                        ),
+                        TechDecision(
+                          title: 'UI Builder',
+                          description:
+                              'Enabled modern, responsive user interfaces aligned with ServiceNow '
+                              'Next Experience standards.',
+                        ),
                       ],
                     ),
                   );
@@ -126,8 +169,9 @@ class SelectedProjectsSection extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(
                     context,
-                    '/project-detail',
+                    '/project/outsystems-enterprise-apps',
                     arguments: ProjectModel(
+                      slug: 'outsystems-enterprise-apps',
                       title: 'Nayon Pilipino – Mobara',
                       subtitle: 'Japan-Based E-Commerce Application',
                       imagePath: 'assets/images/outsystems/oslogo.jpg',
@@ -141,9 +185,29 @@ class SelectedProjectsSection extends StatelessWidget {
                           'secure Stripe payments. Managed Firestore data modeling, Cloud '
                           'Functions, and CI/CD deployments for iOS and Google Play.',
                       screenshots: [
-                        'assets/images/outsystems/oslogo.jpg',
-                        'assets/images/outsystems/oslogo.jpg',
-                        'assets/images/outsystems/oslogo.jpg',
+                        'assets/images/outsystems/checkwriter.svg',
+                        'assets/images/outsystems/checkwriter2.svg',
+                        'assets/images/outsystems/theportalmobile.jpg',
+                      ],
+                      techDecisions: [
+                        TechDecision(
+                          title: 'OutSystems',
+                          description:
+                              'Adopted for rapid low-code development while maintaining enterprise-grade '
+                              'performance and scalability.',
+                        ),
+                        TechDecision(
+                          title: 'REST & SOAP APIs',
+                          description:
+                              'Integrated multiple backend systems using secure API patterns to '
+                              'support financial transactions and data exchange.',
+                        ),
+                        TechDecision(
+                          title: 'Security Architecture',
+                          description:
+                              'Implemented role-based access control and validation layers suitable '
+                              'for banking and financial environments.',
+                        ),
                       ],
                     ),
                   );

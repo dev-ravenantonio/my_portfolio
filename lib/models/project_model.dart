@@ -1,4 +1,15 @@
+class TechDecision {
+  final String title;
+  final String description;
+
+  TechDecision({
+    required this.title,
+    required this.description,
+  });
+}
+
 class ProjectModel {
+  final String slug;
   final String title;
   final String subtitle;
   final String imagePath;
@@ -7,8 +18,10 @@ class ProjectModel {
   final String tech;
   final String details;
   final List<String> screenshots;
+  final List<TechDecision> techDecisions;
 
   ProjectModel({
+    required this.slug,
     required this.title,
     required this.subtitle,
     required this.imagePath,
@@ -17,5 +30,6 @@ class ProjectModel {
     required this.tech,
     required this.details,
     required this.screenshots,
+    required this.techDecisions,
   });
 }
